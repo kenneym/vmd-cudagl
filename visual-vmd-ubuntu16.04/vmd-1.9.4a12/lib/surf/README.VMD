@@ -1,0 +1,26 @@
+This README contains information about how to get VMD working with
+SURF.  This was tested with VMD 1.2b1 and SURF version 1.0 .  All
+references are assumed to be relative to vmd-1.2b1/lib/surf .
+
+SURF is contained in the VMD distribution, with permission from the
+authors.  The only known bug is that under AIX SURF will crash if
+there are no atoms.  The surf_AIX3 distributed as part of that
+distribution has a workaround for that case, but I've since forgotten
+what I did (something to do with adding a 1 somewhere) so we'll be
+sure to fix this when we redo the next AIX version.
+
+ If you want the original code, see
+ftp://ftp.cs.unc.edu/pub/projects/GRIP/SURF/surf.tar.Z
+
+ To get SURF working for VMD:
+
+1)  uncompress and untar surf.tar.Z
+2)  make depend
+  This uses 'makedepend' which is one of the binaries that comes with X11.
+It might not be in your path (eg, /usr/openwin/bin for Solaris 2.5).
+
+3)  make
+4)  mv surf surf_$ARCH   (for example: mv surf surf_IRIX5)
+
+Note that SURF untars into the local directory, which is why this
+README is called README.VMD (else one would overwrite the other).

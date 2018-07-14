@@ -1,0 +1,37 @@
+This code generates the point distribution for the solvent accessible
+surface.  There should be no reason for you to use this code unless
+you want to experiment with different/more/less point sets.  As such,
+the documentation describing what to do is rather incomplete.  Here's
+the rough outline.
+
+The code to generate the point sets is from Jon Leech and is in
+points.tar.gz .  You will have to uncompress and untar it yourself as
+well as compile it.  This produces the program "distribute".  Copy it
+to this (the parent) directory.
+
+
+Run vmd_distribute.pl to generate the data files by multipley calling
+Jon Leech's "distribute" code.  This makes point distributions for a
+sphere used by the simple solvent accessible code in VMD.  
+
+Then run vmd_data.pl to make the actual data file
+("DrawMolItemSolvenPoints.data") used by VMD.
+
+Finally (you must do this by hand) copy that file,
+"./DrawMolItemSolventPoints.data" to your VMD source directory.
+
+
+If you want to change the number of point/line samples, change
+the line:
+for($n = 30; $n < 256; $n *= 1.2) {
+in vmd_distribute.pl
+
+If you change the number of points then you should also remove all the
+data files (*.vrml, *.lines, *.points) in the current directory, since
+vmd_data.pl will pack _all_ the relevant files into the Draw.....data
+file, including leftovers from a previous attempts.
+
+						Andrew Dalke
+						dalke@ks.uiuc.edu
+						Nov. 4, 1996
+

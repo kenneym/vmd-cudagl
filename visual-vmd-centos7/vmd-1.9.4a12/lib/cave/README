@@ -1,0 +1,24 @@
+CAVE Library README
+-------------------
+
+  The CAVE is now marketed commercially, and libraries can't be distributed
+with programs like VMD, only as a compiled binary.
+
+If you don't know what the CAVE is, see http://evlweb.eecs.uic.edu/EVL/VR/ 
+To get it, contact the EVL at UIC or NCSA at UIUC.  
+Once you have it, the headers should be placed in './include' and 
+the libraries in "lib_IRIX5" with "lib_IRIX6" being a symbolic link 
+to "lib_IRIX5"
+
+  The standard VMD distribution for SGIs is compiled with the cave
+library built in.  To use that option, start VMD with the run-time
+option "-dispdev cave".  To enable the VMD GUI in addition to the
+cave, use the run-time option "-dispdev caveforms".
+
+If you're an NCSA user, we build VMD with the libraries:
+  /afs/ncsa/packages/cave/IRIX_5.2/Alternate/cave2.6.0g+
+
+NCSA keeps current Cave programming docs at:
+  http://www.ncsa.uiuc.edu/VR/VR/Docs/CAVE_Current/CAVEGuide.html
+
+

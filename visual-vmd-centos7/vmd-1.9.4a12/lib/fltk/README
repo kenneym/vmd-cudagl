@@ -1,0 +1,25 @@
+This README contains information about how to get VMD working with FLTK.  
+
+cd into the fltk directory, and run 
+./configure  after setting the CC CXX CFLAGS and CXXFLAGS environment 
+variables.
+
+For Solaris (on sparc) the ideal options to use are:
+  setenv CC     cc
+  setenv CXX    CC
+  setenv CFLAGS "-fast -xO3 -native -xdepend -xarch=v8plusa"
+  setenv CXXFLAGS "-fast -xO3 -native -xarch=v8plusa"
+
+
+To initially setup this directory, do steps similar to the following:
+  unpack fltk-1.0.X-source.tar.gz  (where X is 7, 8, or 9, etc)
+  ln -s fltk-1.0.X  fltk
+  ln -s fltk include
+  mkdir LINUXPPC
+  cd fltk, and make your FLTK libraries...
+  cd ..
+  cd LINUXPPC
+  cp ../fltk/lib/*.a .
+
+
+

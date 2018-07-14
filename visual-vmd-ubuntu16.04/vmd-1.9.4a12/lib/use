@@ -1,0 +1,464 @@
+#!/usr/bin/env perl
+############################################################################
+#cr                                                                       
+#cr            (C) Copyright 1995 The Board of Trustees of the            
+#cr                        University of Illinois                         
+#cr                         All Rights Reserved                           
+#cr                                                                       
+############################################################################
+# DESCRIPTION:
+#
+# Our internal directories are kept in library.local which has everything
+# in it.  From it we build the appropriate directories for compiling,
+# for source code distribution, and for binary distribution.
+#
+# Usage: use local
+#  This makes a symbolic link and is used for local compiles
+
+
+# The source distribution includes no libraries but does have the
+# correct underlying structure and the source code.
+# Usage: use source
+
+# The distribution for a given architecture has the correct structure
+# and the binaries for the given architecture
+# Usage: use AIX4
+# Usage: use HPUX10
+# Usage: use IRIX5
+# Usage: use IRIX6
+# Usage: use IRIX6_64
+# Usage: use LINUX
+# Usage: use LINUXPPC
+# Usage: use TRU64
+# Usage: use SOLARIS2
+# Usage: use SOLARIS2_64
+# Usage: use SOLARISX86
+#  ...
+
+############################################################################
+
+# Paranoia check
+if (! -d "Mesa.local") {
+    die "I don't think you know how to use this script\n";
+    # But then that's because it is somewhat poorly defined
+    # Hopefully the final 1.2 version will describe this better
+}
+
+#######################  Mesa  #####################
+
+sub Mesa_clear {
+    `rm -fr Mesa`;
+};
+
+sub Mesa_link {
+    `ln -s Mesa.local Mesa`;
+};
+
+sub Mesa_structure {
+    `mkdir Mesa`;
+    `cp Mesa.local/README Mesa`;
+    `
+cd Mesa ;
+ln -s Mesa-3.1 Mesa ;
+ln -s Mesa/include include ;
+ln -s Mesa/lib lib_AIX4 ;
+ln -s Mesa/lib lib_HPUX10 ;
+ln -s Mesa/lib lib_IRIX5 ;
+ln -s Mesa/lib lib_IRIX6 ;
+ln -s Mesa/lib lib_IRIX6_64 ;
+ln -s Mesa/lib lib_LINUX ;
+ln -s Mesa/lib lib_LINUXALPHA ;
+ln -s Mesa/lib lib_LINUXAMD64 ;
+ln -s Mesa/lib lib_LINUXPPC ;
+ln -s Mesa/lib lib_LINUXPPC64 ;
+ln -s Mesa/lib lib_TRU64 ;
+ln -s Mesa/lib lib_SOLARIS2 ;
+ln -s Mesa/lib lib_SOLARIS2_64 ;
+ln -s Mesa/lib lib_SOLARISX86 ;
+`
+};
+
+sub Mesa_source {
+    # don't do anything (there is no source available)
+};
+
+sub Mesa_binary {
+    # don't do anything (we don't distribute binaries)
+};
+
+#######################  CAVE  #####################
+
+sub cave_clear {
+    `rm -fr cave`;
+};
+
+sub cave_link {
+    `ln -s cave.local cave`;
+};
+
+sub cave_structure {
+    `mkdir cave`;
+    `cp cave.local/README cave`;
+};
+
+sub cave_source {
+    # don't do anything (there is no source available)
+};
+
+sub cave_binary {
+    # don't do anything (there are no binaries)
+};
+
+#######################  Python  #####################
+
+sub python_clear {
+    `rm -fr python`;
+};
+
+sub python_link {
+    `ln -s python.local python`;
+};
+
+sub python_structure {
+    `mkdir python`;
+    `cp python.local/README python`;
+};
+
+sub python_source {
+    # don't do anything (there is no source) 
+};
+
+sub python_binary {
+    # don't do anything (there are no binaries)
+};
+
+
+#######################  FLTK  #####################
+
+sub fltk_clear {
+    `rm -fr fltk`;
+};
+
+sub fltk_link {
+    `ln -s fltk.local fltk`;
+};
+
+sub fltk_structure {
+    `mkdir fltk`;
+    `cp fltk.local/README fltk`;
+};
+
+sub fltk_source {
+    # don't do anything (there is no source) 
+};
+
+sub fltk_binary {
+    # don't do anything (there are no binaries)
+};
+
+
+#######################  points  #####################
+
+sub points_clear {
+    `rm -fr points`;
+};
+
+sub points_link {
+    `ln -s points.local points`;
+};
+
+sub points_structure {
+    `mkdir points`;
+    `cp points.local/README points`;
+};
+
+sub points_source {
+    `cp points.local/* points/`;
+};
+
+sub points_binary {
+    # don't do anything (there are no binaries)
+};
+
+#######################  scripts  #####################
+
+sub scripts_clear {
+    `rm -fr scripts`;
+};
+
+sub scripts_link {
+    `ln -s scripts.local scripts`;
+};
+
+sub scripts_structure {
+    `mkdir scripts`;
+    `cp scripts.local/README scripts`;
+};
+
+sub scripts_source {
+## I temp. unlink the RCS for vmd scripts
+## add when Tcl-DP is distributed
+## cp -r scripts.local/dp4.0 scripts ;
+## ln -s dp4.0 dp
+# Tcl 8.4.x
+#    `
+#cp -r scripts.local/tcl8.4 scripts ;
+#cp -r scripts.local/tk8.4 scripts ;
+#cd scripts ;
+#ln -s tcl8.4 tcl ;
+#ln -s tcl8.4 tcl8.0 ;
+#ln -s tk8.4 tk ;
+#ln -s tk8.4 tk8.0 ;
+#`;
+# Tcl 8.5.x
+    `
+cp -r scripts.local/tcl8 scripts ;
+cp -r scripts.local/tcl8.5 scripts ;
+cp -r scripts.local/tk8.5 scripts ;
+`;
+};
+
+sub scripts_binary {
+    # in this case the source is the binaries
+    &scripts_source;
+};
+#######################  STRIDE  #####################
+
+sub stride_clear {
+    `rm -fr stride`;
+};
+
+sub stride_link {
+    `ln -s stride.local stride`;
+};
+
+sub stride_structure {
+    `mkdir stride`;
+    `cp stride.local/README stride/`;
+};
+
+sub stride_source {
+    # we do not distribute the source
+};
+
+sub stride_binary {
+    `cp stride.local/stride_$ARCH$EXE stride/`;
+};
+
+#######################  SURF  #####################
+
+sub surf_clear {
+    `rm -fr surf`;
+};
+
+sub surf_link {
+    `ln -s surf.local surf`;
+};
+
+sub surf_structure {
+    `mkdir surf`;
+    `cp surf.local/README.VMD surf.local/README.VMD surf/`;
+};
+
+sub surf_source {
+    `cp surf.local/surf.tar.Z surf/`;
+};
+
+sub surf_binary {
+    `cp surf.local/surf_$ARCH$EXE surf/`;
+};
+
+#######################  Spaceball  #####################
+
+sub libsball_clear {
+    `rm -fr libsball`;
+};
+
+sub libsball_link {
+    `ln -s libsball.local libsball`;
+};
+
+sub libsball_structure {
+    `mkdir libsball`;
+    `cp libsball.local/README libsball/`;
+};
+
+sub libsball_source {
+    # we do not distribute the source
+};
+
+sub libsball_binary {
+};
+
+#######################  Tachyon  #####################
+
+sub tachyon_clear {
+    `rm -fr tachyon`;
+};
+
+sub tachyon_link {
+    `ln -s tachyon.local tachyon`;
+};
+
+sub tachyon_structure {
+    `mkdir tachyon`;
+    `cp tachyon.local/README tachyon/`;
+};
+
+sub tachyon_source {
+    # we do not distribute the source
+};
+
+sub tachyon_binary {
+    `cp tachyon.local/tachyon_$ARCH$EXE tachyon/`;
+};
+
+####################################################
+
+##
+##  The main driver -- 
+
+if ($#ARGV != 0) {
+    print STDERR "Usage:\n";
+    print STDERR "  use local   -- links to .local files\n";
+    print STDERR "  use source  -- sets up the source distribution\n";
+    print STDERR "  use IRIX5   -- sets up for different architectures\n";
+    print STDERR "  use LINUX\n";
+    exit;
+}
+
+$ARCH = '';
+$EXE  = '';
+if ($ARGV[0] eq 'local') {
+    &Mesa_clear;
+    &Mesa_link;
+
+    &cave_clear;
+    &cave_link;
+
+    &python_clear;
+    &python_link;
+
+    &fltk_clear;
+    &fltk_link;
+
+    &points_clear;
+    &points_link;
+
+    &scripts_clear;
+    &scripts_link;
+
+    &stride_clear;
+    &stride_link;
+
+    &surf_clear;
+    &surf_link;
+
+    &tachyon_clear;
+    &tachyon_link;
+
+    &libsball_clear;
+    &libsball_link;
+
+    exit(0);
+}
+
+if ($ARGV[0] eq 'source') {
+    &Mesa_clear;
+    &Mesa_structure;
+    &Mesa_source;
+
+    &cave_clear;
+    &cave_structure;
+    &cave_source;
+
+    &python_clear;
+    &python_structure;
+    &python_source;
+
+    &fltk_clear;
+    &fltk_structure;
+    &fltk_source;
+
+    &points_clear;
+    &points_structure;
+    &points_source;
+
+    &scripts_clear;
+    &scripts_structure;
+    &scripts_source;
+
+    &stride_clear;
+    &stride_structure;
+    &stride_source;
+
+    &surf_clear;
+    &surf_structure;
+    &surf_source;
+
+    &tachyon_clear;
+    &tachyon_structure;
+    &tachyon_source;
+
+    &libsball_clear;
+    &libsball_structure;
+    &libsball_source;
+
+    exit(0);
+}
+
+$ARCH = $ARGV[0];
+if ($ARCH =~ /[a-z]/ ) {
+    die "$ARCH doesn't look like an architecture name\n";
+}
+
+#
+# Architecture specific stuff goes here, like handling for
+# .exe binary suffixes for WIN32 builds.
+#
+#if ($ARCH != "WIN32") {
+#  print "WIN32 Builds Use .exe extension...";
+#  $EXE = '.exe';
+#}
+
+##########################
+&Mesa_clear;
+&Mesa_structure;
+&Mesa_binary;
+
+&cave_clear;
+&cave_structure;
+&cave_binary;
+
+&python_clear;
+&python_structure;
+&python_binary;
+
+&fltk_clear;
+&fltk_structure;
+&fltk_binary;
+
+&points_clear;
+&points_structure;
+&points_binary;
+
+&scripts_clear;
+&scripts_structure;
+&scripts_binary;
+
+&stride_clear;
+&stride_structure;
+&stride_binary;
+
+&surf_clear;
+&surf_structure;
+&surf_binary;
+
+&tachyon_clear;
+&tachyon_structure;
+&tachyon_binary;
+
+&libsball_clear;
+&libsball_structure;
+&libsball_binary;
+

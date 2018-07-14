@@ -1,0 +1,34 @@
+This README contains information about how to get VMD working with
+Mesa.  This was tested with VMD 1.2b1 and Mesa 2.2 .  All file
+references are assumed to be relative to vmd-1.2b1/lib/Mesa unless
+otherwise stated.
+
+  Download Mesa from iris.ssec.wisc.edu in the pub/Mesa directory.
+Mesa is also mirrored on sunsite.unc.edu in the directory
+pub/packages/development/graphics/mesa .  For more information, see
+also http://www.ssec.wisc.edu/~brianp/Mesa.html .  
+
+  Compile it (and install if desired).  Please note that there seems
+to be a bug/typo in the installation instructions.  It says:
+
+  cp -r include/GL /usr/local/include
+
+but this doesn't put the include files in the correct place, so
+instead try:
+
+  mkdir /usr/local/include/GL
+  cp -r include/GL /usr/local/include/GL
+
+
+  IF MESA IS INSTALLED ON YOUR MACHINE (and the include files are in
+/usr/local/include/GL) then you don't have to modify the configure
+script (../../configure).
+
+  If Mesa is not in the standard location, edit the MESA_INCLUDE_DIR
+and MESA_LIBRARY_DIR variables in the configure script to point to the
+correct Mesa library and include files for this architecture.  Note
+that the script doesn't quite get the ARCH variable set in the right
+place to use it like you would expect for other libraries.  We really
+need to rework that script.
+
+  The needed Mesa libraries are libMesaGL.a and libMesaGLU.a.
