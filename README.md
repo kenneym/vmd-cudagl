@@ -50,8 +50,6 @@ Clone this repository. Download and untar/unzip a precompiled Linux VMD version 
 	
 	docker build -t your-container-name .
 	
-*NOTE:* You may also pull the docker image from Docker Hub by issuing the command `docker pull mkenney1/vmd-cudagl:ubuntu16.04` or `docker pull mkenney1/vmd-cudagl:centos7`.
-
 #### Step 3: Run the Container
 To run the container, issue the command below. This will enable your container to access files in your local directory (such as .pdb files) within the container's workspace directory, and enable to the container to access the host's X-server.
 
@@ -70,12 +68,3 @@ Running the image in this way will cause VMD to launch directly. If you would in
 	container-name /bin/bash
 
 Then, simply type `vmd` from within the container to start the program.
-
-#### Step 4: Test Performance:
-Test files were too large to be included in this Github repository, but are included in the Dockerhub version of each image. To run these testfiles from the Dockerhub versions of the images provided, enter the container's bash, then, move to the opt/vmd/h1n1testscene or opt/vmd/hivtestscne directory in your container. Each test  will run a "quicksurf" calculation on your molecule of choice, and output information about the length of time elapsed when performing each stage of this calculation. To run the test, after moving to the directory containing your test of choice, type the command:
-
-`vmd --dispdev openglpbuffer -e name-of-script`
-
-`openglpbuffer` can be replaced with simply `opengl` to see the test run visually, but this will slow down the test speed as it will require the GPU to perform both calculations and display graphics at the same time. `name-of-script` is simply the name of whichever .vmd test script you have chosen to run.
-
-The HIV capsid test is a much more computationally rigorous test than the H1N1 test, so choose whichever is best suited to testing your hardware. Running `htop` or `nvidia-smi` from your local machine while a VMD test is running may provide you valuable information about the computational load placed on your CPU(s) and GPU(s) respectively.
