@@ -56,14 +56,14 @@ Clone this repository. Then, cd to the directory containing your operating syste
 To run the container, issue the command below. This will enable your container to access files in your local directory (such as .pdb files) within the container's workspace directory, and enable to the container to access the host's X-server.
 
 	nvidia-docker run -it --rm -v $(pwd):/workspace \
-	-v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/.docker.xauth:/tmp/.docker.xauth \
+	-v '/tmp/.X11-unix':'/tmp/.X11-unix' -v '/tmp/.docker.xauth':'/tmp/.docker.xauth' \
 	-e XAUTHORITY=/tmp/.docker.xauth -e DISPLAY \
 	container-name
 	
 Running the image in this way will cause VMD to launch directly. If you would instead prefer to enter the container's command line first, you can issue the same command with `bin/bash` appended to the end:
 
 	nvidia-docker run -it --rm -v $(pwd):/workspace \
-	-v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/.docker.xauth:/tmp/.docker.xauth \
+	-v '/tmp/.X11-unix':'/tmp/.X11-unix' -v '/tmp/.docker.xauth':'/tmp/.docker.xauth' \
 	-e XAUTHORITY=/tmp/.docker.xauth -e DISPLAY \
 	container-name /bin/bash
 
