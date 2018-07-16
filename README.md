@@ -7,8 +7,8 @@ Each image was built by extending NVIDIA's CudaGl images (Cuda + Opengl). All cu
 These images include Cuda Version 9.1, and VMD version 1.9.4a12. You may either clone this repository and modify these images to your liking, or pull directly from Dockerhub. 
 
 #### Image Size:
-- Centos 7: 2.83GB
-- Ubuntu 16.04: 2.83GB
+- `Centos 7`: 2.83GB
+- `Ubuntu 16.04`: 2.83GB
 
 ## Purpose
 The purpose of this image is to enable researchers to use either script-driven OR visual VMD depending upon their needs. While scripting in VMD is a very powerful tool, some researchers may find that certain tasks are best done visually. Further, they may find that some work-flows in VMD vary extensively enough experiment-to-experiment that scripting is not ideal. In our case, we need researchers who are not familiar with tcl/tk scripting to use some features of this container visually, enabling them to put forth their knowledge within their own realms of expertise without spending extensive time learning scripting. Containerized programs are attractive for a variety or reasons, including their ease-of-use, compatibility with powerful servers, and more. 
