@@ -46,7 +46,7 @@ Type the following commands directing into your bash command line. This code wil
 
 
 #### Step 2: Build the Container
-Clone this repository. Download and untar/unzip a precompiled Linux VMD version 1.9.4a12 from VMD's webiste. Next, move the resultant vmd folder directly into the repository containing your Dockerfile of choice (either `visual-vmd-centos7` or `visual-vmd-ubuntu16.04. Then, cd to the directory containing your operating system of choice, and issue the following command:
+Clone this repository. Download and untar/unzip a precompiled Linux VMD version 1.9.4a12 from VMD's webiste. Next, move the resultant vmd folder directly into the repository containing your Dockerfile of choice (either `visual-vmd-centos7` or `visual-vmd-ubuntu16.04`. Then, cd to the directory containing your operating system of choice, and issue the following command:
 	
 	docker build -t your-container-name .
 	
