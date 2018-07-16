@@ -70,6 +70,10 @@ Running the image in this way will cause VMD to launch directly. If you would in
 Then, simply type `vmd` from within the container to start the program.
 
 #### Step 4: Test Performance:
-Test files were too large to be included in this Github repository, but are included in the Dockerhub version of each image. To run these testfiles from the Dockerhub versions of the images provided. Move to the opt/vmd/h1n1testscene or opt/vmd/hivtestscne directory in your container. Each test  will run a "quicksurf" calculation on your molecule of choice, and output information about the length of time elapsed when performing each stage of this calculation.
+Test files were too large to be included in this Github repository, but are included in the Dockerhub version of each image. To run these testfiles from the Dockerhub versions of the images provided, enter the container's bash, then, move to the opt/vmd/h1n1testscene or opt/vmd/hivtestscne directory in your container. Each test  will run a "quicksurf" calculation on your molecule of choice, and output information about the length of time elapsed when performing each stage of this calculation. To run the test, after moving to the directory containing your test of choice, type the command:
 
-The HIV capsid test is a much more computationally rigorous test than the H1N1 test, so choose whichever is best suited to testing your hardware. Running `htop` or `nvidia-smi` from your local machine while a VMD test is running may provide you valuable information about the computational load placed on your cpu(s) and gpu(s) respectively.
+`vmd --dispdev openglpbuffer -e name-of-script`
+
+`openglpbuffer` can be replaced with simply `opengl` to see the test run visually, but this will slow down the test speed as it will require the GPU to perform both calculations and display graphics at the same time. `name-of-script` is simply the name of whichever .vmd test script you have chosen to run.
+
+The HIV capsid test is a much more computationally rigorous test than the H1N1 test, so choose whichever is best suited to testing your hardware. Running `htop` or `nvidia-smi` from your local machine while a VMD test is running may provide you valuable information about the computational load placed on your CPU(s) and GPU(s) respectively.
